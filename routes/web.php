@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('contacts', 'ContactController');
+// Route::resource('contacts', 'ContactController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/p/create', 'PostsController@create');
+Route::post('/p', 'PostsController@store');
+
+
+Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
