@@ -1915,12 +1915,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["userId"],
   mounted: function mounted() {
     console.log("Component mounted.");
   },
   methods: {
     followUser: function followUser() {
-      axios.post("/follow/1").then(function (Response) {
+      axios.post("/follow/" + this.userId).then(function (Response) {
         alert(Response.data);
       });
     }
