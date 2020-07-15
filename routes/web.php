@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::resource('contacts', 'ContactController');
-
 Auth::routes();
+
+Route::post('follow/{user}', function () {
+    return ['success'];
+});
 
 Route::get('/p/create', 'PostsController@create');
 Route::get('/p/{post}', 'PostsController@show');
