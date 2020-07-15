@@ -1915,15 +1915,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["userId"],
+  props: ["userId", "follows"],
   mounted: function mounted() {
     console.log("Component mounted.");
   },
+  data: function data() {
+    return {
+      status: this.follows
+    };
+  },
   methods: {
     followUser: function followUser() {
-      axios.post("/follow/" + this.userId).then(function (Response) {
-        alert(Response.data);
+      var _this = this;
+
+      axios.post("/follow/" + this.userId).then(function (response) {
+        _this.status = !_this.status;
+        console.log(response.data);
+      })["catch"](function (errors) {
+        if (errors.response.status == 401) {
+          window.location = "/login";
+        }
       });
+    }
+  },
+  computed: {
+    ButtonText: function ButtonText() {
+      return this.status ? "Unfollow" : "Follow";
     }
   }
 });
@@ -37523,11 +37540,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "button",
-      { staticClass: "btn btn-primary ml-4", on: { click: _vm.followUser } },
-      [_vm._v("Follow")]
-    )
+    _c("button", {
+      staticClass: "btn btn-primary ml-4",
+      domProps: { textContent: _vm._s(_vm.ButtonText) },
+      on: { click: _vm.followUser }
+    })
   ])
 }
 var staticRenderFns = []
@@ -49858,7 +49875,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleError: Module Error (from ./node_modules/resolve-url-loader/index.js):\nresolve-url-loader: loader misconfiguration\n  \"engine\" option is not valid\n    at Object.emitError (/Users/Yousif/Documents/GitHub/laravel-7-crud-app/node_modules/webpack/lib/NormalModule.js:173:6)\n    at handleAsError (/Users/Yousif/Documents/GitHub/laravel-7-crud-app/node_modules/resolve-url-loader/index.js:214:12)\n    at Object.resolveUrlLoader (/Users/Yousif/Documents/GitHub/laravel-7-crud-app/node_modules/resolve-url-loader/index.js:156:12)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
